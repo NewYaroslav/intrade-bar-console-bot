@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="check_named_pipe_server" />
+		<Option pch_mode="2" />
+		<Option compiler="mingw_64_7_3_0" />
+		<Build>
+			<Target title="Release">
+				<Option output="bin/Release/check_named_pipe_server" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="mingw_64_7_3_0" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-std=c++0x" />
+					<Add directory="../../lib/simple-named-pipe-server" />
+					<Add directory="../../lib/json/include" />
+					<Add directory="../../lib/xtime_cpp/src" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add directory="../../lib/simple-named-pipe-server" />
+					<Add directory="../../lib/json/include" />
+					<Add directory="../../lib/xtime_cpp/src" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="../../lib/simple-named-pipe-server/named-pipe-server.hpp" />
+		<Unit filename="../../lib/xtime_cpp/src/xtime.cpp" />
+		<Unit filename="../../lib/xtime_cpp/src/xtime.hpp" />
+		<Unit filename="main.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
