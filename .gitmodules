@@ -31,3 +31,9 @@
 [submodule "lib/zlib"]
 	path = lib/zlib
 	url = https://github.com/madler/zlib.git
+[submodule "lib/curl-7.70.0-win32-mingw"]
+	path = lib/curl-7.70.0-win32-mingw
+	url = https://github.com/NewYaroslav/curl-7.70.0-win32-mingw.git
+[submodule "lib/openssl_win32"]
+	path = lib/openssl_win32
+	url = https://github.com/NewYaroslav/openssl_win32.git

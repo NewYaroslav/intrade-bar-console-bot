@@ -130,6 +130,7 @@ namespace intrade_bar_console_bot {
                         } else {
                             api.update_balance();
                             PrintThread{} << "deal open, symbol: " << symbol << std::endl;
+
                         } //
                     } else {
                         PrintThread{} << "binary options parameters error" << std::endl;
@@ -150,6 +151,7 @@ namespace intrade_bar_console_bot {
 
         /* запускаем сервер */
         server->start();
+
     }
 
     void update_connection(

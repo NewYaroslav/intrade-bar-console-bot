@@ -44,12 +44,15 @@ int main(int argc, char **argv) {
         }
         /* обновляем баланс */
         api.update_balance(false);
-        balance =  api.get_balance();
+        balance = api.get_balance();
         std::cout << "authorization successful!" << std::endl;
         std::cout << "email: " << settings.email << std::endl;
         std::cout << "balance: " << balance << std::endl;
         std::cout << "demo: " << api.demo_account() << std::endl;
         std::cout << "rub currency: " << api.account_rub_currency() << std::endl;
+        std::cout << "delay between bets: " << settings.delay_bets_ms << " ms" << std::endl;
+
+        api.set_bets_delay((double)settings.delay_bets_ms / 1000.0d);
 
         /* далее реализуем named pipe сервер */
         std::shared_ptr<SimpleNamedPipe::NamedPipeServer> named_pipe_server;

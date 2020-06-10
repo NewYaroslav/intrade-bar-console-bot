@@ -41,6 +41,7 @@ namespace intrade_bar_console_bot {
         bool is_demo_account = true;    /**< Флаг использования демо счета */
         bool is_rub_currency = true;    /**< Флаг использования рублевого счета */
         bool is_error = false;
+        uint32_t delay_bets_ms = 1000;  /**< Задержка между сделками, в мс */
 
         Settings() {};
 
@@ -107,6 +108,7 @@ namespace intrade_bar_console_bot {
                 if(j["rub"] != nullptr) is_rub_currency = j["rub"];
                 if(j["rub_currency"] != nullptr) is_rub_currency = j["rub_currency"];
                 if(j["named_pipe"] != nullptr) named_pipe = j["named_pipe"];
+                if(j["delay_bets_ms"] != nullptr) delay_bets_ms = j["delay_bets_ms"];
             }
             catch(...) {
                 is_error = true;
