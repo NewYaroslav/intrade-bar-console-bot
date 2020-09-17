@@ -7,7 +7,7 @@
 		<Option compiler="mingw_64_7_3_0" />
 		<Build>
 			<Target title="Release-x64">
-				<Option output="intrade-bar-console-bot-x64" prefix_auto="1" extension_auto="1" />
+				<Option output="intrade-bar-console-bot-2v0-x64" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="mingw_64_7_3_0" />
@@ -64,7 +64,7 @@
 				</Linker>
 			</Target>
 			<Target title="Release-x32">
-				<Option output="intrade-bar-console-bot-x32" prefix_auto="1" extension_auto="1" />
+				<Option output="intrade-bar-console-bot-2v0-x32" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="mingw_32_i686-730" />
@@ -140,6 +140,7 @@
 		<Unit filename="../../lib/intrade-bar-api-cpp/include/intrade-bar-logger.hpp" />
 		<Unit filename="../../lib/intrade-bar-api-cpp/include/intrade-bar-websocket-api-v2.hpp" />
 		<Unit filename="../../lib/intrade-bar-api-cpp/include/intrade-bar-websocket-api.hpp" />
+		<Unit filename="../../lib/simple-named-pipe-server/named-pipe-server.hpp" />
 		<Unit filename="../../lib/xtime_cpp/src/xtime.cpp" />
 		<Unit filename="../../lib/xtime_cpp/src/xtime.hpp" />
 		<Unit filename="../../lib/zlib/adler32.c">

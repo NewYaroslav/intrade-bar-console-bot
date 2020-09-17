@@ -116,9 +116,6 @@ namespace intrade_bar_console_bot {
             if(password.size() == 0 || email.size() == 0) is_error = true;
         }
     };
-
-
-
 };
 
 #endif // INTRADE_BAR_CONSOLE_BOT_SETTINGS_HPP_INCLUDED
