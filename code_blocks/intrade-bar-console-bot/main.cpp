@@ -25,7 +25,7 @@
 
 #include "intrade-bar-console-bot.hpp"
 
-#define PROGRAM_VERSION "2.0"
+#define PROGRAM_VERSION "2.1"
 #define PROGRAM_DATE "17.09.2020"
 
 int main(int argc, char **argv) {
@@ -38,7 +38,7 @@ int main(int argc, char **argv) {
     }
 
     while(true) {
-        intrade_bar::IntradeBarApi api(0,nullptr,false,true,false,false,settings.sert_file,settings.cookie_file,"","","");
+        intrade_bar::IntradeBarApi api(settings.point,0,nullptr,false,true,false,false,settings.sert_file,settings.cookie_file,"","","");
         double balance = 0.0;
         /* подключаемся к брокеру */
         int err = api.connect(settings.email, settings.password, settings.is_demo_account, settings.is_rub_currency);

@@ -32,6 +32,7 @@ namespace intrade_bar_console_bot {
      */
     class Settings {
     public:
+        std::string point = "1.intrade.bar";
         std::string json_settings_file;                     /**< Файл настроек */
         std::string email;
         std::string password;
@@ -58,6 +59,9 @@ namespace intrade_bar_console_bot {
                 /* аргумент json_file указываает на файл с настройками json */
                 if(key == "json_settings_file" || key == "jsf") {
                     json_settings_file = value;
+                } else
+                if(key == "point") {
+                    point = value;
                 } else
                 if(key == "email" || key == "e") {
                     email = value;
@@ -102,6 +106,7 @@ namespace intrade_bar_console_bot {
             /* разбираем json сообщение */
             try {
                 if(j["email"] != nullptr) email = j["email"];
+                if(j["point"] != nullptr) point = j["point"];
                 if(j["password"] != nullptr) password = j["password"];
                 if(j["demo"] != nullptr) is_demo_account = j["demo"];
                 if(j["demo_account"] != nullptr) is_demo_account = j["demo_account"];
