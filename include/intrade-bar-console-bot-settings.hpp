@@ -41,7 +41,10 @@ namespace intrade_bar_console_bot {
         std::string named_pipe = "intrade_bar_console_bot"; /**< Имя именованного канала */
         bool is_demo_account = true;    /**< Флаг использования демо счета */
         bool is_rub_currency = true;    /**< Флаг использования рублевого счета */
+        bool is_reboot = false;
+        bool is_price_stream = false;
         bool is_error = false;
+
         uint32_t delay_bets_ms = 1000;  /**< Задержка между сделками, в мс */
 
         Settings() {};
@@ -81,6 +84,12 @@ namespace intrade_bar_console_bot {
                 if(key == "usd_currency" || key == "usd") {
                     is_rub_currency = false;
                 } else
+                if(key == "reboot") {
+                    is_reboot = true;
+                } else
+                if(key == "price_stream") {
+                    is_price_stream = true;
+                } else
                 if(key == "named_pipe" || key == "np") {
                     named_pipe = value;
                 }
@@ -112,6 +121,8 @@ namespace intrade_bar_console_bot {
                 if(j["demo_account"] != nullptr) is_demo_account = j["demo_account"];
                 if(j["rub"] != nullptr) is_rub_currency = j["rub"];
                 if(j["rub_currency"] != nullptr) is_rub_currency = j["rub_currency"];
+                if(j["reboot"] != nullptr) is_reboot = j["reboot"];
+                if(j["price_stream"] != nullptr) is_price_stream = j["price_stream"];
                 if(j["named_pipe"] != nullptr) named_pipe = j["named_pipe"];
                 if(j["delay_bets_ms"] != nullptr) delay_bets_ms = j["delay_bets_ms"];
             }

@@ -21,19 +21,19 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#define INTRADE_BAR_BOT_VERSION_B
 
 #include "intrade-bar-console-bot.hpp"
 
-#define PROGRAM_VERSION "2.1"
-#define PROGRAM_DATE "17.09.2020"
+#define PROGRAM_VERSION "2.3"
+#define PROGRAM_DATE "04.10.2020"
 
 int main(int argc, char **argv) {
-    std::cout << "intrade-bar-console-bot " PROGRAM_VERSION << std::endl << std::endl;
-    std::cout << "start" << std::endl;
+    std::cout << "intrade.bar console bot " PROGRAM_VERSION << std::endl << std::endl;
+    std::cout << "intrade.bar bot: start" << std::endl;
     intrade_bar_console_bot::Settings settings(argc, argv);
     if(settings.is_error) {
-        std::cout << "Settings error!" << std::endl;
+        std::cout << "intrade.bar bot: settings error!" << std::endl;
+        intrade_bar_console_bot::wait_space();
         return EXIT_FAILURE;
     }
 
@@ -43,29 +43,29 @@ int main(int argc, char **argv) {
         /* подключаемся к брокеру */
         int err = api.connect(settings.email, settings.password, settings.is_demo_account, settings.is_rub_currency);
         if(err != intrade_bar_common::OK) {
-            std::cout << "Authorization error! Are all the settings set exactly?" << std::endl;
-            std::cout << "email: " << settings.email << std::endl;
+            std::cout << "intrade.bar bot: authorization error! Are all the settings set exactly?" << std::endl;
+            intrade_bar_console_bot::wait_space();
             return EXIT_FAILURE;
         }
         /* обновляем баланс */
         api.update_balance(false);
         balance = api.get_balance();
-        std::cout << std::endl << "Authorization successful!" << std::endl;
-        std::cout << "email: " << settings.email << std::endl;
-        std::cout << "balance: " << balance << std::endl;
-        std::cout << "demo: " << api.demo_account() << std::endl;
-        std::cout << "rub currency: " << api.account_rub_currency() << std::endl;
-        std::cout << "delay between bets: " << settings.delay_bets_ms << " ms" << std::endl;
+        api.set_bets_delay((double)settings.delay_bets_ms / 1000.0d);
+
+        std::cout << "intrade.bar bot: authorization successful!" << std::endl << std::endl;
+        std::cout << "intrade.bar bot: email = " << settings.email << std::endl;
+        std::cout << "intrade.bar bot: balance = " << balance << std::endl;
+        std::cout << "intrade.bar bot: demo = " << api.demo_account() << std::endl;
+        std::cout << "intrade.bar bot: rub currency = " << api.account_rub_currency() << std::endl;
+        std::cout << "intrade.bar bot: delay between bets = " << settings.delay_bets_ms << " ms" << std::endl;
         std::cout << std::endl;
 
-        api.set_bets_delay((double)settings.delay_bets_ms / 1000.0d);
         intrade_bar_console_bot::Bot bot;
-        bot.is_program_bot = true;
         bot.init_named_pipe_server(settings.named_pipe, api);
 
         int last_second_minute = 0;
         int second_minute = 0;
-        xtime::timestamp_t restart_timestamp = xtime::get_last_timestamp_day(xtime::get_timestamp());
+        xtime::timestamp_t restart_timestamp = settings.is_reboot ? xtime::get_last_timestamp_day(xtime::get_timestamp()) : xtime::get_timestamp(1,1,2100);
         while(xtime::get_timestamp() < restart_timestamp) {
             while(true) {
                 second_minute = xtime::get_second_minute(api.get_server_timestamp());
@@ -78,10 +78,11 @@ int main(int argc, char **argv) {
             bot.update_ping(DEALY);
             bot.update_balance(api, DEALY);
             bot.update_connection(api);
-            bot.update_prices(api);
+            if(settings.is_price_stream) bot.update_prices(api);
             bot.check_exit(DEALY);
             std::this_thread::yield();
         }
+        std::cout << "intrade.bar bot: restart" << std::endl;
     }
     return 0;
 }

@@ -27,8 +27,10 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <thread>
 #include <mutex>
 #include <nlohmann/json.hpp>
+#include <conio.h>
 
 namespace intrade_bar_console_bot {
     using json = nlohmann::json;
@@ -139,6 +141,28 @@ namespace intrade_bar_console_bot {
             std::cout << this->str();
         }
     };
+
+    void wait_space() {
+        /* обрабатываем нажатие клавиши для выхода из программы */
+        while(true) {
+            bool is_exit = false;
+            if(kbhit()) {
+                int c = getch();
+                switch(c) {
+                    case VK_SPACE:
+                    is_exit = true;
+                    std::cout << "exit" << std::endl;
+                    break;
+                    default:
+                    std::cout << c << std::endl;
+                    break;
+                }
+            } // if
+            if(is_exit) break;
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        }
+    }
+
 };
 
 #endif // INTRADE_BAR_CONSOLE_BOT_COMMON_HPP_INCLUDED
